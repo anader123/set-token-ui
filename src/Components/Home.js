@@ -18,11 +18,7 @@ export default class Home extends Component {
     return (
       <div>
         <h2>Create a Set of your choosing.</h2>
-        {cardData.map(data => {
-          return(
-            <CardBox data={data}/>
-          )
-        })}
+        {cardData.map((data, index) => <CardBox key={`id-${index}`} data={data}/>)}
       </div>
     )
   }
