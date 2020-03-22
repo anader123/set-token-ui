@@ -15,9 +15,7 @@ import {
 
 import {
   Label,
-  Input,
-  Select,
-  Textarea
+  Input
 } from '@rebass/forms'
 
 export default class StandardSet extends Component {
@@ -26,18 +24,45 @@ export default class StandardSet extends Component {
 
     this.state = {
       step: 1,
-      setDetails: [stableTokenData[0], stableTokenData[1]],
+      setDetails: [],
+      sliderValues: [0, 0, 0],
+      sliderSum: 0,
       setName: '',
       setSymbol: '',
       setAddress: ''
     }
   }
 
-  addToken = async (name, symbol, address) => {
+  addToken = async (name, symbol, address, image) => {
     const { setDetails } = this.state;
-    const newSetDetails = [...setDetails];
-    newSetDetails.push({name, symbol, address});
-    await this.setState({ setDetails: newSetDetails });
+    if(setDetails.findIndex(i => i.name === name) === -1) {
+      const newSetDetails = [...setDetails];
+      newSetDetails.push({name, symbol, address, image});
+      await this.setState({ setDetails: newSetDetails });
+    }
+  }
+
+  removeToken = async index => {
+    const { setDetails, sliderValues } = this.state;
+
+    const setDetailsCopy = [...setDetails];
+    setDetailsCopy.splice(index, 1);
+
+    const sliderValuesCopy = [...sliderValues];
+    sliderValuesCopy.splice(index, 1);
+
+    await this.setState({ 
+      setDetails: setDetailsCopy, 
+      sliderValues: sliderValuesCopy 
+    });
+    this.sumSliderValues();
+  }
+
+  updateSliderValues = sliderValues => this.setState({ sliderValues });
+
+  sumSliderValues = () => {
+    const sliderSum = this.state.sliderValues.reduce((a, b) => a + b, 0);
+    this.setState({ sliderSum });
   }
 
   nextStep = () => { 
@@ -54,8 +79,18 @@ export default class StandardSet extends Component {
     this.setState({[input]: e.target.value});
   }
 
+  percentCheck = (fx) => {
+    const { sliderSum } = this.state;
+    if(sliderSum === 100) {
+      fx();
+    }
+    else {
+      window.alert('Please make sure that you have allocated 100% of your tokens to the set.')
+    }
+  }
+
   render() {
-    const { step, setDetails, setName, setSymbol, setAddress } = this.state;
+    const { step, setDetails, setName, setSymbol, setAddress, sliderSum, sliderValues } = this.state;
     const values = { setDetails, setName, setSymbol, setAddress };
 
     switch(step) {
@@ -64,37 +99,33 @@ export default class StandardSet extends Component {
         <div>
           <Heading>Select Tokens</Heading>
           <div className='tokenBox-container'>
-            {stableTokenData.map((token, index) => <TokenBox key={`id-${index}`} addToken={this.addToken} token={token}/>)}
+            {stableTokenData.map((token, index) => <TokenBox key={`id-${index}`} addToken={this.addToken} index={index} token={token}/>)}
           </div>
-          <Button onClick={this.nextStep}>Next</Button>
+              {setDetails.map((token, index) => <SliderBar 
+              sliderSum={sliderSum} removeToken={this.removeToken} sumSliderValues={this.sumSliderValues} updateSliderValues={this.updateSliderValues} sliderValues={sliderValues} key={`id-${index}`} index={index} token={token} />)}
+              <div>
+                {sliderSum}%
+              </div>
+            <Button onClick={() => this.percentCheck(this.nextStep)}>Next</Button>
         </div>
       )
       case 2:
-        return (
-          <div>
-            <Heading>Choose Percent</Heading>
-              {setDetails.map(token => <SliderBar token={token} />)}
-            <Button onClick={this.prevStep}>Previous</Button>
-            <Button onClick={this.nextStep}>Next</Button>
-          </div>
-        )
-      case 3:
         return (
           <div>
             <h1>Enter Set Details</h1>
             <Box as='form' onSubmit={e => e.preventDefault()}>
               
               <Label>Token Name</Label>
-              <Input onChange={this.handleInputChange('setName')}/>
+              <Input onChange={this.handleInputChange('setName')} required/>
               <Label>Token Symbol</Label>
-              <Input onChange={this.handleInputChange('setSymbol')}/>
+              <Input onChange={this.handleInputChange('setSymbol')} required/>
 
               <Button onClick={this.prevStep}>Previous</Button>
               <Button onClick={this.nextStep}>Next</Button>
             </Box>
           </div>
         )
-      case 4:
+      case 3:
         return (
           <div>
             <h1>Confirm Details</h1>

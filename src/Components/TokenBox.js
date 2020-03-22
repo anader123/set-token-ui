@@ -16,7 +16,7 @@ export default function TokenBox(props) {
     <Box width={256}>
       <Card
         onClick={() => {
-          addToken(token.name, token.symbol, token.address);
+          addToken(token.name, token.symbol, token.address, token.image);
         }}
         sx={{
             ':hover': {
