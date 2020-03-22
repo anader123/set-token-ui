@@ -8,18 +8,21 @@ export const stableTokenData = [
     "address": "0x1d82471142F0aeEEc9FC375fC975629056c26ceE",
     "symbol": "DAI",
     "name": "DAI Stablecoin",
-    "image": DAI
+    "image": DAI,
+    "amount": 0
   },
   {
     "address": "",
     "symbol": "USDC",
     "name": "USD Coin",
-    "image": USDC
+    "image": USDC,
+    "amount": 0
   },
   {
     "address": "0xAdB015D61F4bEb2A712D237D9d4c5B75BAFEfd7B",
     "symbol": "TUSD",
     "name": "True USD",
-    "image": TUSD
+    "image": TUSD,
+    "amount": 0
   }
 ]

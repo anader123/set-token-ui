@@ -5,6 +5,7 @@ import { stableTokenData } from '../Ethereum/TokenData';
 
 // Components
 import TokenBox from './TokenBox';
+import SliderBar from './SliderBar';
 
 import {
   Button,
@@ -25,7 +26,7 @@ export default class StandardSet extends Component {
 
     this.state = {
       step: 1,
-      setDetails: [],
+      setDetails: [stableTokenData[0], stableTokenData[1]],
       setName: '',
       setSymbol: '',
       setAddress: ''
@@ -60,9 +61,11 @@ export default class StandardSet extends Component {
     switch(step) {
       case 1: 
       return (
-        <div className='tokenBox-container'>
+        <div>
           <Heading>Select Tokens</Heading>
-          {stableTokenData.map((token, index) => <TokenBox key={`id-${index}`} addToken={this.addToken} token={token}/>)}
+          <div className='tokenBox-container'>
+            {stableTokenData.map((token, index) => <TokenBox key={`id-${index}`} addToken={this.addToken} token={token}/>)}
+          </div>
           <Button onClick={this.nextStep}>Next</Button>
         </div>
       )
@@ -70,6 +73,7 @@ export default class StandardSet extends Component {
         return (
           <div>
             <Heading>Choose Percent</Heading>
+              {setDetails.map(token => <SliderBar token={token} />)}
             <Button onClick={this.prevStep}>Previous</Button>
             <Button onClick={this.nextStep}>Next</Button>
           </div>
