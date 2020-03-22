@@ -6,8 +6,18 @@ import { stableTokenData } from '../Ethereum/TokenData';
 // Components
 import TokenBox from './TokenBox';
 
-// Images
+import {
+  Button,
+  Heading,
+  Box
+} from 'rebass'
 
+import {
+  Label,
+  Input,
+  Select,
+  Textarea
+} from '@rebass/forms'
 
 export default class StandardSet extends Component {
   constructor() {
@@ -27,22 +37,19 @@ export default class StandardSet extends Component {
     const newSetDetails = [...setDetails];
     newSetDetails.push({name, symbol, address});
     await this.setState({ setDetails: newSetDetails });
-    console.log(setDetails)
   }
 
-  // Proceed to next step 
   nextStep = () => { 
     const { step } = this.state;
     this.setState({ step: step + 1 });
   }
 
-  // Proceed to go back a step 
   prevStep = () => { 
     const { step } = this.state;
     this.setState({ step: step - 1 });
   }
 
-  handleInputChange = (input, e) => {
+  handleInputChange = input => e => {
     this.setState({[input]: e.target.value});
   }
 
@@ -54,30 +61,43 @@ export default class StandardSet extends Component {
       case 1: 
       return (
         <div className='tokenBox-container'>
+          <Heading>Select Tokens</Heading>
           {stableTokenData.map((token, index) => <TokenBox key={`id-${index}`} addToken={this.addToken} token={token}/>)}
-          <button onClick={this.nextStep}>Next</button>
+          <Button onClick={this.nextStep}>Next</Button>
         </div>
       )
       case 2:
         return (
           <div>
-            <h2>Sliders</h2>
-            <button onClick={this.nextStep}>Next</button>
+            <Heading>Choose Percent</Heading>
+            <Button onClick={this.prevStep}>Previous</Button>
+            <Button onClick={this.nextStep}>Next</Button>
           </div>
         )
       case 3:
-        return <h1>Enter Details</h1>
+        return (
+          <div>
+            <h1>Enter Set Details</h1>
+            <Box as='form' onSubmit={e => e.preventDefault()}>
+              
+              <Label>Token Name</Label>
+              <Input onChange={this.handleInputChange('setName')}/>
+              <Label>Token Symbol</Label>
+              <Input onChange={this.handleInputChange('setSymbol')}/>
+
+              <Button onClick={this.prevStep}>Previous</Button>
+              <Button onClick={this.nextStep}>Next</Button>
+            </Box>
+          </div>
+        )
       case 4:
-        return <h1>Confirm page</h1>
-      case 5:
-        return <h1>Success</h1>
+        return (
+          <div>
+            <h1>Confirm Details</h1>
+            <Button onClick={this.prevStep}>Previous</Button>
+          </div>
+        )
     }
-    return (
-      <div>
-        <h3>Creating a Standard Set</h3>
-        
-      </div>
-    )
   }
 }
 
