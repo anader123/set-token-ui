@@ -15,6 +15,7 @@ export default function CardBox(props) {
   return (
     <div>
       <Box width={256}>
+      <Link href={data.path}>
         <Card
           onClick={() => {
               console.log('hit') 
@@ -44,11 +45,10 @@ export default function CardBox(props) {
             <Text fontSize={0}>
                 {data.text}
             </Text>
-            <Link href={data.path}>
-            <button >Create</button>
-            </Link>
+            {/* <Button>Create</Button> */}
           </Box>
         </Card>
+      </Link>
       </Box>
     </div>
   )

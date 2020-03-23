@@ -25,7 +25,7 @@ export default class StandardSet extends Component {
     this.state = {
       step: 1,
       setDetails: [],
-      sliderValues: [0, 0, 0],
+      sliderValues: [],
       sliderSum: 0,
       setName: '',
       setSymbol: '',
@@ -34,11 +34,14 @@ export default class StandardSet extends Component {
   }
 
   addToken = async (name, symbol, address, image) => {
-    const { setDetails } = this.state;
+    const { setDetails, sliderValues } = this.state;
     if(setDetails.findIndex(i => i.name === name) === -1) {
       const newSetDetails = [...setDetails];
       newSetDetails.push({name, symbol, address, image});
-      await this.setState({ setDetails: newSetDetails });
+
+      const newSliderValues = [...sliderValues];
+      newSliderValues.push(0)
+      await this.setState({ setDetails: newSetDetails, sliderValues: newSliderValues });
     }
   }
 
@@ -89,6 +92,16 @@ export default class StandardSet extends Component {
     }
   }
 
+  tokenCheck = (fx) => {
+    const { setDetails } = this.state;
+    if(setDetails.length >= 1) {
+      fx();
+    }
+    else {
+      window.alert('Please select tokens you would like in your set.')
+    }
+  }
+
   render() {
     const { step, setDetails, setName, setSymbol, setAddress, sliderSum, sliderValues } = this.state;
     const values = { setDetails, setName, setSymbol, setAddress };
@@ -99,36 +112,63 @@ export default class StandardSet extends Component {
         <div>
           <Heading>Select Tokens</Heading>
           <div className='tokenBox-container'>
-            {stableTokenData.map((token, index) => <TokenBox key={`id-${index}`} addToken={this.addToken} index={index} token={token}/>)}
+            {stableTokenData.map((token, index) => 
+            <TokenBox 
+            key={`id-${index}`} 
+            removeToken={this.removeToken} 
+            addToken={this.addToken} 
+            index={index} 
+            token={token}
+            setDetails={setDetails}
+            />)}
           </div>
-              {setDetails.map((token, index) => <SliderBar 
-              sliderSum={sliderSum} removeToken={this.removeToken} sumSliderValues={this.sumSliderValues} updateSliderValues={this.updateSliderValues} sliderValues={sliderValues} key={`id-${index}`} index={index} token={token} />)}
-              <div>
-                {sliderSum}%
-              </div>
-            <Button onClick={() => this.percentCheck(this.nextStep)}>Next</Button>
+          <Button onClick={() => this.tokenCheck(this.nextStep)}>Next</Button>
         </div>
       )
       case 2:
+        return (
+          <div>
+            <Heading>Choose Percents</Heading>
+            {setDetails.map((token, index) => 
+            <SliderBar 
+            sliderSum={sliderSum} 
+            removeToken={this.removeToken} 
+            sumSliderValues={this.sumSliderValues} 
+            updateSliderValues={this.updateSliderValues} 
+            sliderValues={sliderValues} key={`id-${index}`} 
+            index={index} 
+            token={token} 
+            />)}
+              <div>
+                Total: {sliderSum}%
+              </div>
+            <Button onClick={this.prevStep}>Previous</Button>
+            <Button onClick={() => this.percentCheck(this.nextStep)}>Next</Button>
+          </div>
+        )
+      case 3:
         return (
           <div>
             <h1>Enter Set Details</h1>
             <Box as='form' onSubmit={e => e.preventDefault()}>
               
               <Label>Token Name</Label>
-              <Input onChange={this.handleInputChange('setName')} required/>
+              <Input value={setName} onChange={this.handleInputChange('setName')} required/>
               <Label>Token Symbol</Label>
-              <Input onChange={this.handleInputChange('setSymbol')} required/>
+              <Input value={setSymbol} onChange={this.handleInputChange('setSymbol')} required/>
 
               <Button onClick={this.prevStep}>Previous</Button>
               <Button onClick={this.nextStep}>Next</Button>
             </Box>
           </div>
         )
-      case 3:
+      case 4:
         return (
           <div>
             <h1>Confirm Details</h1>
+            {sliderValues.map(value => <div>{value}</div>)}
+            <div>{setName}</div>
+            <div>{setSymbol}</div>
             <Button onClick={this.prevStep}>Previous</Button>
           </div>
         )

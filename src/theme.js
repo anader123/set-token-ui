@@ -39,6 +39,8 @@ export default {
     text: {
     },
     link: {
+      textDecoration: 'none',
+        color: 'black',
         '&:hover': {
             color: 'primary',
         }
@@ -53,10 +55,9 @@ export default {
         fontFamily: 'body',
         outline: 'none',
         cursor: 'pointer',
-        transition: '300ms',
+        transitionDuration: '0.4s',
         ':hover': {
-            bg: '#735ef9',
-            transition: '300ms',
+          bg: '#735ef9'
         }
       },
     },

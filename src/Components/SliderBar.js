@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
 	Image,
 	Box,
 	Heading,
-	Text
+	Text,
+	Button
 } from 'rebass'
 
 export default function SliderBar(props) {
@@ -42,7 +43,7 @@ export default function SliderBar(props) {
 				required
 			/>
 			<Text>{value}%</Text>
-			<p onClick={() => removeToken(index)}>x</p>
+  			<Button onClick={() => removeToken(index)}>Remove Token</Button>
     </Box>
   )
 }
