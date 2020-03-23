@@ -69,6 +69,9 @@ export default {
             '&:focus': {
                 outline: 'none',
                 borderColor: 'primary',
+            },
+            '&:range': {
+
             }
         },
         select: {

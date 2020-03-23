@@ -54,7 +54,7 @@ export default function TokenBox(props) {
           }
           :
           {
-          backgroundColor: '#F4F4FA',
+          backgroundColor: '#ddd9f9',
           transform: 'scale(1.08)',
           width: 'auto',
           p: 1,
