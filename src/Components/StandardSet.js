@@ -6,12 +6,14 @@ import { stableTokenData } from '../Ethereum/TokenData';
 // Components
 import TokenBox from './TokenBox';
 import SliderBar from './SliderBar';
+import PieChart from './PieChart';
 
 import {
   Button,
   Heading,
   Box,
-  Flex
+  Flex,
+  Card
 } from 'rebass'
 
 import {
@@ -68,6 +70,8 @@ export default class StandardSet extends Component {
     const sliderSum = this.state.sliderValues.reduce((a, b) => a + b, 0);
     this.setState({ sliderSum });
   }
+
+  updateSliderAmount = setDetails => this.setState({ setDetails });
 
   nextStep = () => { 
     const { step } = this.state;
@@ -133,15 +137,18 @@ export default class StandardSet extends Component {
             <Heading>Total: {sliderSum}%</Heading>
             <Flex sx={{justifyContent:'space-evenly', margin: 3}}> 
                 {setDetails.map((token, index) => 
-                  <Box sx={{height: '250px', width: '250px'}}>
-                    <SliderBar 
+                  <Box key={`id-${index}`} sx={{height: '250px', width: '250px'}}>
+                    <SliderBar
+                    key={`id-${index}`} 
                     sliderSum={sliderSum} 
                     removeToken={this.removeToken} 
                     sumSliderValues={this.sumSliderValues} 
                     updateSliderValues={this.updateSliderValues} 
-                    sliderValues={sliderValues} key={`id-${index}`} 
+                    sliderValues={sliderValues} 
                     index={index} 
-                    token={token} 
+                    token={token}
+                    setDetails={setDetails}
+                    updateSliderAmount={this.updateSliderAmount}
                     />
                   </Box>
                 )}
@@ -159,9 +166,9 @@ export default class StandardSet extends Component {
             <Box as='form' onSubmit={e => e.preventDefault()}>
               
               <Label>Token Name</Label>
-              <Input value={setName} onChange={this.handleInputChange('setName')} required/>
+              <Input type='text' value={setName} onChange={this.handleInputChange('setName')} required/>
               <Label>Token Symbol</Label>
-              <Input value={setSymbol} onChange={this.handleInputChange('setSymbol')} required/>
+              <Input type='text' value={setSymbol} onChange={this.handleInputChange('setSymbol')} required/>
 
               <Flex sx={{justifyContent:'space-around', minWidth:'300px', margin: '30px', padding: [3,0,0,3]}}>
               <Button onClick={this.prevStep}>Previous</Button>
@@ -172,13 +179,32 @@ export default class StandardSet extends Component {
         )
       case 4:
         return (
-          <div>
-            <h1>Confirm Details</h1>
-            {sliderValues.map(value => <div>{value}</div>)}
-            <div>{setName}</div>
-            <div>{setSymbol}</div>
-            <Button onClick={this.prevStep}>Previous</Button>
-          </div>
+          <Box>
+            <Heading>Confirm Details</Heading>
+            <Card 
+            sx={{
+              m: 3,
+              p: 1,
+              transition: '300ms',
+              borderRadius: 2,
+              boxShadow: '0 0 16px rgba(0, 0, 0, .25)',
+              height: '500px',
+              width: '400px',
+              display: 'flex',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              cursor: 'pointer'
+              }}
+            >
+              <div>Name: {setName}</div><div>Symbol: {setSymbol}</div>
+              <div>Composition</div>
+              {setDetails.map(token => <div>{token.amount}% {token.symbol}</div>)}
+              <svg width='200' height='200'>
+                <PieChart data={setDetails} x={100} y={100} />
+              </svg>
+            </Card>
+              <Button onClick={this.prevStep}>Previous</Button>
+          </Box>
         )
     }
   }

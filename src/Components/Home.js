@@ -1,6 +1,13 @@
-import React, { Component } from 'react'
-import CardBox from './CardBox'
+import React, { Component } from 'react';
+import CardBox from './CardBox';
 
+
+import {
+  Button,
+  Heading,
+  Box,
+  Flex
+} from 'rebass'
 export default class Home extends Component {
   render() {
     const cardData = [
@@ -17,8 +24,10 @@ export default class Home extends Component {
     ]
     return (
       <div>
-        <h2>Create a Set of your choosing.</h2>
-        {cardData.map((data, index) => <CardBox key={`id-${index}`} data={data}/>)}
+        <Heading>Create a Set of your choosing.</Heading>
+        <Flex sx={{justifyContent:' space-evenly', width: '800px'}} m={4}>
+          {cardData.map((data, index) => <CardBox key={`id-${index}`} data={data}/>)}
+        </Flex>
       </div>
     )
   }

@@ -18,16 +18,24 @@ export default function SliderBar(props) {
 		sliderValues, 
 		sumSliderValues, 
 		updateSliderValues,
-		removeToken
+    removeToken,
+    setDetails,
+    updateSliderAmount
 	} = props;
 	const [value, setValue] = useState(sliderValues[index]);
 
-	const handleChange = async (event) => {
+	const handleChange = async event => {
+    const setDetailsCopy = [...setDetails];
+    setDetailsCopy[index].amount = +event.target.value;
+
 		const sliderValuesCopy = [...sliderValues];
-		sliderValuesCopy[index] = +event.target.value;
-		const valuesSum = sliderValuesCopy.reduce((a, b) => a + b, 0);
+    sliderValuesCopy[index] = +event.target.value;
+    
+    const valuesSum = sliderValuesCopy.reduce((a, b) => a + b, 0);
 		if(valuesSum <= 100 ){
-			setValue(event.target.value);
+      updateSliderAmount(setDetailsCopy);
+
+			setValue(+event.target.value);
 			await updateSliderValues(sliderValuesCopy);
 			sumSliderValues();
 		}
