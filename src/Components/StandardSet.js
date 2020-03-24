@@ -179,7 +179,7 @@ export default class StandardSet extends Component {
         )
       case 4:
         return (
-          <Box>
+        <Box>
             <Heading>Confirm Details</Heading>
             <Card 
             sx={{
@@ -192,11 +192,12 @@ export default class StandardSet extends Component {
               width: '400px',
               display: 'flex',
               justifyContent: 'center',
-              flexDirection: 'column',
-              cursor: 'pointer'
+              alignItems: 'center',
+              flexDirection: 'column'
               }}
             >
-              <div>Name: {setName}</div><div>Symbol: {setSymbol}</div>
+              <Heading>Name: {setName}</Heading>
+              <Heading>Symbol: {setSymbol}</Heading>
               <div>Composition</div>
               {setDetails.map(token => <div>{token.amount}% {token.symbol}</div>)}
               <svg width='200' height='200'>

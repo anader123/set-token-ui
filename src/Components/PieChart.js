@@ -5,27 +5,26 @@ import styled from 'styled-components';
 const Path = styled.path`
   fill: ${props => d3.schemePaired[props.index]};
   stroke: black;
-  cursor: pointer;
 `
 
 const Arc = ({ arcData }) => {
   const arc = d3.arc()
-  .innerRadius(35)
+  .innerRadius(0)
   .outerRadius(75);
 
   return (
-    <Path d={arc(arcData)} index={arcData.index} />
+    <Path d={arc(arcData)} index={arcData.index}>Test</Path>
   )
 }
 
 const PieChart = ({ data, x, y }) => {
-  const pie = d3.pie();
+  const pie = d3.pie().value(d => d.amount);
   return (
     <g transform={`translate(${x}, ${y})`}>
       {pie(data).map((d, index) =>{
         console.log(d);
         return(
-        <Arc key={`id-${index}`} arcData={d.amount}/>
+        <Arc key={`id-${index}`} arcData={d}/>
         )
       })}
     </g>
