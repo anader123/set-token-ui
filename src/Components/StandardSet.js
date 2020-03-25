@@ -21,11 +21,12 @@ export default class StandardSet extends Component {
     }
   }
 
-  addToken = async (name, symbol, address, image) => {
+  addToken = async (token) => {
     const { setDetails, sliderValues } = this.state;
-    if(setDetails.findIndex(i => i.name === name) === -1) {
+    if(setDetails.findIndex(i => i.name === token.name) === -1) {
       const newSetDetails = [...setDetails];
-      newSetDetails.push({name, symbol, address, image});
+      console.log(token)
+      newSetDetails.push(token);
 
       const newSliderValues = [...sliderValues];
       newSliderValues.push(0)

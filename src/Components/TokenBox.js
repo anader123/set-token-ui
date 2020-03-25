@@ -25,7 +25,7 @@ export default function TokenBox(props) {
       <Card
         onClick={() => {
           if(selected === false) {
-            addToken(token.name, token.symbol, token.address, token.image);
+            addToken(token);
             setSelected(true);
           }
           else {

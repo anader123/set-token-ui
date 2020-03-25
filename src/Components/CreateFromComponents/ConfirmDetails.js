@@ -1,13 +1,15 @@
 import React from 'react';
 import PieChart from '../PieChart';
+import styled from 'styled-components';
 
 import {
   Button,
   Heading,
-  Box,
   Flex,
   Card
-} from 'rebass'
+} from 'rebass';
+
+
 
 export default function ConfirmDetails(props) {
   const {
@@ -17,18 +19,24 @@ export default function ConfirmDetails(props) {
     prevStep
   } = props;
 
+  const Box = styled.div`
+    background-color: ${props => props.token.color};
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+  `
   return (
     <div>
       <Heading>Confirm Details</Heading>
       <Flex justifyContent={'center'}>
       <Card 
       sx={{
-        m: 3,
+        m: [3, 0, 0, 4],
         p: 1,
         transition: '300ms',
         borderRadius: 2,
         boxShadow: '0 0 16px rgba(0, 0, 0, .25)',
-        height: '500px',
+        height: '450px',
         width: '400px',
         display: 'flex',
         justifyContent: 'center',
@@ -38,11 +46,18 @@ export default function ConfirmDetails(props) {
       >
         <Heading>Name: {setName}</Heading>
         <Heading>Symbol: {setSymbol}</Heading>
-        <div>Composition</div>
-        {setDetails.map(token => <div>{token.amount}% {token.symbol}</div>)}
         <svg width='200' height='200'>
           <PieChart data={setDetails} x={100} y={100} />
         </svg>
+        {setDetails.map(token => {
+          return(
+            <Flex mt={1} justifyContent={'center'}>
+              <Box token={token} />
+              <br></br>
+              <div>{token.amount}% {token.symbol}</div>
+            </Flex>
+          )
+        })}
       </Card>
       </Flex>
         <Button onClick={prevStep}>Previous</Button>

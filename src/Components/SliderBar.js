@@ -25,20 +25,20 @@ export default function SliderBar(props) {
 	const [value, setValue] = useState(sliderValues[index]);
 
 	const handleChange = async event => {
-    const setDetailsCopy = [...setDetails];
-    setDetailsCopy[index].amount = +event.target.value;
-
 		const sliderValuesCopy = [...sliderValues];
     sliderValuesCopy[index] = +event.target.value;
     
     const valuesSum = sliderValuesCopy.reduce((a, b) => a + b, 0);
+    
 		if(valuesSum <= 100 ){
+      const setDetailsCopy = [...setDetails];
+      setDetailsCopy[index].amount = +event.target.value;
       updateSliderAmount(setDetailsCopy);
 
 			setValue(+event.target.value);
 			await updateSliderValues(sliderValuesCopy);
 			sumSliderValues();
-		}
+    }
 	}
   return (
 	<Box 
@@ -51,15 +51,14 @@ export default function SliderBar(props) {
       boxShadow: '0 0 16px rgba(0, 0, 0, .25)',
       height: '165px',
       display: 'flex',
-      // justifyContent: 'space-evenly',
       alignItems: 'center',
       flexDirection: 'column',
       height: '256px'
-              }}>
+    }}>
 
         <Box
         sx={{
-          // m: [15,0,0,15],
+          m: 3,
           p: 10,
           height: '170px',
           display: 'flex',
@@ -79,10 +78,22 @@ export default function SliderBar(props) {
               onChange={handleChange}
               required
               width='95%'
+              sx={{
+                '-webkit-appearance': 'none',
+                'appearance': 'none',
+                'width': '15%',
+                'height': '8px',
+                'background': '#b9b9b9',
+                'outline': 'none',
+                'opacity': '0.7',
+                '-webkit-transition': '.2s',
+                'transition': 'opacity .2s',
+                'border-radius': '3px'
+              }}
             />
           <Text>{value}%</Text>
         </Box>
-  			<Text sx={{cursor:'pointer'}} onClick={() => removeToken(index)}>Remove Token</Text>
+  			<Button sx={{mt: 0, p: 2, fontSize: 1}} onClick={() => removeToken(index)}>Remove</Button>
 		</Card>
     </Box>
   )

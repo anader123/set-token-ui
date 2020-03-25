@@ -3,8 +3,8 @@ import * as d3 from "d3";
 import styled from 'styled-components';
 
 const Path = styled.path`
-  fill: ${props => d3.schemePaired[props.index]};
-  stroke: black;
+  fill: ${props => props.arcData.data.color};
+  stroke: #9FA4AE;
 `
 
 const Arc = ({ arcData }) => {
@@ -13,7 +13,7 @@ const Arc = ({ arcData }) => {
   .outerRadius(75);
 
   return (
-    <Path d={arc(arcData)} index={arcData.index}>Test</Path>
+    <Path d={arc(arcData)} arcData={arcData}  index={arcData.index}>Test</Path>
   )
 }
 
@@ -22,7 +22,6 @@ const PieChart = ({ data, x, y }) => {
   return (
     <g transform={`translate(${x}, ${y})`}>
       {pie(data).map((d, index) =>{
-        console.log(d);
         return(
         <Arc key={`id-${index}`} arcData={d}/>
         )
