@@ -25,7 +25,7 @@ export default function TokenBoxes(props) {
   return (
     <div>
       <Heading>Select Tokens</Heading>
-      <Flex sx={{justifyContent:' space-evenly', width: '1050px'}} p={5}>
+      <Flex sx={{justifyContent:'center'}} p={5}>
         {stableTokenData.map((token, index) => 
         <TokenBox 
         key={`id-${index}`} 

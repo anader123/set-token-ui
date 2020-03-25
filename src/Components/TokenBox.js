@@ -21,7 +21,7 @@ export default function TokenBox(props) {
   })
   
   return (
-    <Box width={256}>
+    <Box m={[3,0,0,3]} width={256}>
       <Card
         onClick={() => {
           if(selected === false) {

@@ -27,7 +27,7 @@ export default function TokenSelect(props) {
     <div>
       <Heading>Choose Percents</Heading>
       <Heading>Total: {sliderSum}%</Heading>
-      <Flex sx={{justifyContent:'space-evenly', margin: 3}}> 
+      <Flex sx={{justifyContent:'center', margin: 3}}> 
           {setDetails.map((token, index) => 
             <Box key={`id-${index}`} sx={{height: '250px', width: '250px'}}>
               <SliderBar
@@ -45,7 +45,7 @@ export default function TokenSelect(props) {
             </Box>
           )}
       </Flex>
-      <Flex sx={{justifyContent:'space-around', minWidth:'300px', margin: '30px', padding: [3,0,0,3]}}>
+      <Flex sx={{justifyContent:'center', minWidth:'300px', margin: '30px', padding: [3,0,0,3]}}>
         <Button onClick={prevStep}>Previous</Button>
         <Button onClick={() => percentCheck(nextStep)}>Next</Button>
       </Flex>

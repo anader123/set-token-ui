@@ -14,10 +14,11 @@ export default {
     fonts: {
         body: '"Apercu", sans-serif',
         heading: '"Apercu", sans-serif',
+        text: 'sans-serif'
     },
     fontWeights: {
         body: 400,
-        heading: 700,
+        heading: 525,
         bold: 700,
       },
     styles: {
@@ -37,6 +38,9 @@ export default {
     variants: {
     },
     text: {
+      'hover': {
+        color: 'secondary',
+      }
     },
     link: {
       textDecoration: 'none',
@@ -47,6 +51,7 @@ export default {
     },
     buttons: {
       primary: {
+        m: 3,
         color: 'white',
         bg: 'primary',
         lineHeight: 1.15,
@@ -83,6 +88,7 @@ export default {
         checkbox: {},
       },
     heading: {
-        color: 'secondary',
+      fontSize: [ 2, 4 ],
+      color: 'secondary',
     }
   }

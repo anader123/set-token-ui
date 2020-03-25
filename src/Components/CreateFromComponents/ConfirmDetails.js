@@ -18,8 +18,9 @@ export default function ConfirmDetails(props) {
   } = props;
 
   return (
-    <Box>
+    <div>
       <Heading>Confirm Details</Heading>
+      <Flex justifyContent={'center'}>
       <Card 
       sx={{
         m: 3,
@@ -43,7 +44,8 @@ export default function ConfirmDetails(props) {
           <PieChart data={setDetails} x={100} y={100} />
         </svg>
       </Card>
+      </Flex>
         <Button onClick={prevStep}>Previous</Button>
-    </Box>
+    </div>
   )
 }

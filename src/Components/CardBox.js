@@ -14,7 +14,7 @@ export default function CardBox(props) {
   const { data } = props;
   return (
     <div>
-      <Box width={256}>
+      <Box m={4} width={256}>
       <Link href={data.path}>
         <Card
           onClick={() => {
@@ -45,7 +45,6 @@ export default function CardBox(props) {
             <Text fontSize={0}>
                 {data.text}
             </Text>
-            {/* <Button>Create</Button> */}
           </Box>
         </Card>
       </Link>

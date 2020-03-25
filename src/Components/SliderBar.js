@@ -46,7 +46,7 @@ export default function SliderBar(props) {
 	>
 		<Card sx={{
 			m: [15,0,0,15],
-      p: 10,
+      p: '10px',
       borderRadius: 2,
       boxShadow: '0 0 16px rgba(0, 0, 0, .25)',
       height: '165px',
