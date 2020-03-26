@@ -13,8 +13,7 @@ import theme from './theme'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  useParams
+  Route
 } from "react-router-dom";
 
 function App() {
@@ -27,7 +26,6 @@ function App() {
             <Route path="/create-standard-set" component={StandardSet} />
             <Route path="/create-rebalancing-set" component={RebalancingSet} />
             <Route path="/" component={Home} />
-            
           </Switch>
         </Router>
       </ThemeProvider>

@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 // Components
 import TokenSlider from './CreateFromComponents/TokenSliders';
 import TokenBoxs from './CreateFromComponents/TokenBoxes';
-import SetDetailsForm from './CreateFromComponents/SetDetailsFrom';
+import SetDetailsForm from './CreateFromComponents/SetDetailsForm';
 import ConfirmDetails from './CreateFromComponents/ConfirmDetails';
+import WalletConnect from './WalletConnect';
 
 export default class StandardSet extends Component {
   constructor() {
@@ -25,7 +26,6 @@ export default class StandardSet extends Component {
     const { setDetails, sliderValues } = this.state;
     if(setDetails.findIndex(i => i.name === token.name) === -1) {
       const newSetDetails = [...setDetails];
-      console.log(token)
       newSetDetails.push(token);
 
       const newSliderValues = [...sliderValues];
@@ -107,6 +107,12 @@ export default class StandardSet extends Component {
     switch(step) {
       case 1: 
       return (
+        <div>
+          <WalletConnect nextStep={this.nextStep} />
+        </div>
+      )
+      case 2: 
+      return (
         <TokenBoxs  
           setDetails={setDetails}
           removeToken={this.removeToken}
@@ -115,7 +121,7 @@ export default class StandardSet extends Component {
           nextStep={this.nextStep}
         />
       )
-      case 2:
+      case 3:
         return (
           <TokenSlider
             sliderSum={sliderSum} 
@@ -130,7 +136,7 @@ export default class StandardSet extends Component {
             nextStep={this.nextStep}
           />
         )
-      case 3:
+      case 4:
         return (
           <SetDetailsForm
             setName={setName}
@@ -140,7 +146,7 @@ export default class StandardSet extends Component {
             nextStep={this.nextStep}
           />
         )
-      case 4:
+      case 5:
         return (
           <ConfirmDetails 
             setDetails={setDetails}

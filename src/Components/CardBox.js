@@ -3,10 +3,8 @@ import React from 'react';
 import {
   Box,
   Card,
-  Image,
   Heading,
   Text,
-  Button,
   Link
 } from 'rebass'
 

@@ -13,7 +13,7 @@ import {
   Input
 } from '@rebass/forms'
 
-export default function SetDetailsFrom(props) {
+export default function SetDetailsForm(props) {
   const { 
     handleInputChange, 
     prevStep, 
@@ -28,10 +28,24 @@ export default function SetDetailsFrom(props) {
       <Flex justifyContent={'center'}>
         <Box as='form' mt={4} width={'400px'} onSubmit={e => e.preventDefault()}>
           
-          <Label>Token Name</Label>
-          <Input type='text' value={setName} onChange={handleInputChange('setName')} required/>
-          <Label>Token Symbol</Label>
-          <Input type='text' value={setSymbol} onChange={handleInputChange('setSymbol')} required/>
+          <Box m={4}>
+            <Label>Token Name</Label>
+            <Input 
+              type='text' 
+              value={setName} 
+              onChange={handleInputChange('setName')} 
+              required
+            />
+          </Box>
+          <Box m={4}>
+            <Label>Token Symbol</Label>
+            <Input 
+              type='text' 
+              value={setSymbol} 
+              onChange={handleInputChange('setSymbol')} 
+              required
+            />
+          </Box>
 
           <Flex sx={{justifyContent:'center', minWidth:'300px', mt: 3, padding: [3,0,0,3]}}>
           <Button onClick={prevStep}>Previous</Button>

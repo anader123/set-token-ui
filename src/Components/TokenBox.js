@@ -5,9 +5,7 @@ import {
   Card,
   Image,
   Heading,
-  Text,
-  Button,
-  Link
+  Text
 } from 'rebass'
 
 export default function TokenBox(props) {
@@ -18,7 +16,7 @@ export default function TokenBox(props) {
 		if(setDetails.findIndex(i => i.name === token.name) !== -1) {
       setSelected(true);
     }
-  })
+  }, [setDetails, token.name])
   
   return (
     <Box m={[3,0,0,3]} width={256}>

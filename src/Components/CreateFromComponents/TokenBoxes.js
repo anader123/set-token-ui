@@ -9,9 +9,7 @@ import { stableTokenData } from '../../Ethereum/TokenData';
 import {
   Button,
   Heading,
-  Box,
   Flex,
-  Card
 } from 'rebass';
 
 export default function TokenBoxes(props) {
@@ -25,7 +23,7 @@ export default function TokenBoxes(props) {
   return (
     <div>
       <Heading>Select Tokens</Heading>
-      <Flex sx={{justifyContent:'center'}} p={5}>
+      <Flex sx={{justifyContent:'center'}} p={4}>
         {stableTokenData.map((token, index) => 
         <TokenBox 
         key={`id-${index}`} 

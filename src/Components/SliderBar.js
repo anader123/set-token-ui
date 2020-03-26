@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import {
 	Image,
@@ -9,7 +9,7 @@ import {
 	Card
 } from 'rebass';
 
-import { Label, Slider } from '@rebass/forms'
+import { Slider } from '@rebass/forms'
 
 export default function SliderBar(props) {
 	const { 
@@ -77,18 +77,16 @@ export default function SliderBar(props) {
               value={value}
               onChange={handleChange}
               required
-              width='95%'
               sx={{
-                '-webkit-appearance': 'none',
+                'WebkitAppearance': 'none',
                 'appearance': 'none',
-                'width': '15%',
                 'height': '8px',
                 'background': '#b9b9b9',
                 'outline': 'none',
                 'opacity': '0.7',
-                '-webkit-transition': '.2s',
+                'WebkitTransition': '.2s',
                 'transition': 'opacity .2s',
-                'border-radius': '3px'
+                'borderRadius': '3px'
               }}
             />
           <Text>{value}%</Text>

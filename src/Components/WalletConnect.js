@@ -1,18 +1,30 @@
-import React, { useState } from 'react';
-import { Button, Link, Text } from 'rebass';
+import React, { useState, useEffect } from 'react';
+import { Button, Heading, Flex } from 'rebass';
 
-export default function WalletConnect() {
-  const [walletConnected, setWalletConnected] = useState(false);
-  const [userAddress, setUserAddress] = useState('');
-  const [shortUserAddress, setShortUserAddress] = useState('')
+// Redux
+import { connect } from 'react-redux';
+import {
+  setUserAddress,
+  toggleWalletConnected
+} from '../Redux/actions';
+
+function WalletConnect(props) {
+  const { walletConnected, toggleWalletConnected, setUserAddress, nextStep } = props;
+
+  useEffect(() => {
+    if(window.ethereum.selectedAddress !== null) {
+      setUserAddress(window.ethereum.selectedAddress);
+      nextStep();
+      toggleWalletConnected(true);
+    }
+  }, [walletConnected])
 
   const connectWallet = async () => {
     if(window.ethereum) {
       const accounts = await window.ethereum.enable();
       setUserAddress(accounts[0]);
-      const shortAddress = `${accounts[0].slice(0, 7)}...${accounts[0].slice(35, 42)}`;
-      setShortUserAddress(shortAddress);
-      setWalletConnected(true);
+      toggleWalletConnected(true);
+      nextStep();
     }
     else {
       window.alert('No Ethereum wallet detected.');
@@ -20,18 +32,17 @@ export default function WalletConnect() {
   }
   return (
     <div>
-      {!walletConnected 
-      ?
-      <Button mr={[1, 5]} onClick={connectWallet}>Connect Wallet</Button>
-      :
-      <Link 
-        target="_blank" 
-        rel="noopener noreferrer"
-        href={`https://etherscan.io/address/${userAddress}`}
-      >
-        <Text mr={[1, 4]}>Address: {shortUserAddress}</Text>
-      </Link>
-      }
+      <Heading mt={6}>Please connect your Ethereum wallet to create a Set.</Heading>
+      <Button mt={4} onClick={connectWallet}>Connect Wallet</Button>
     </div>
   )
 }
+
+function mapStateToProps(state) {
+  return state;
+}
+
+export default connect(mapStateToProps, {
+  setUserAddress, 
+  toggleWalletConnected
+})(WalletConnect);

@@ -9,8 +9,6 @@ import {
   Card
 } from 'rebass';
 
-
-
 export default function ConfirmDetails(props) {
   const {
     setDetails,
@@ -49,15 +47,16 @@ export default function ConfirmDetails(props) {
         <svg width='200' height='200'>
           <PieChart data={setDetails} x={100} y={100} />
         </svg>
-        {setDetails.map(token => {
-          return(
-            <Flex mt={1} justifyContent={'center'}>
-              <Box token={token} />
-              <br></br>
-              <div>{token.amount}% {token.symbol}</div>
-            </Flex>
-          )
-        })}
+        <Flex flexDirection={'column'} justifyContent={'flex-start'}>
+          {setDetails.map(token => {
+            return(
+              <Flex mt={1} alignItems={'flex-start'}>
+                <Box token={token} />
+                <div>{token.amount}% {token.symbol}</div>
+              </Flex>
+            )
+          })}
+        </Flex>
       </Card>
       </Flex>
         <Button onClick={prevStep}>Previous</Button>
