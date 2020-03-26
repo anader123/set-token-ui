@@ -35,7 +35,7 @@ export default function ConfirmDetails(props) {
         borderRadius: 2,
         boxShadow: '0 0 16px rgba(0, 0, 0, .25)',
         height: '450px',
-        width: '400px',
+        width: '375px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -48,9 +48,9 @@ export default function ConfirmDetails(props) {
           <PieChart data={setDetails} x={100} y={100} />
         </svg>
         <Flex flexDirection={'column'} justifyContent={'flex-start'}>
-          {setDetails.map(token => {
+          {setDetails.map((token, index) => {
             return(
-              <Flex mt={1} alignItems={'flex-start'}>
+              <Flex key={`id-${index}`} mt={1} alignItems={'flex-start'}>
                 <Box token={token} />
                 <div>{token.amount}% {token.symbol}</div>
               </Flex>

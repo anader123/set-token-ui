@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CardBox from './CardBox';
 import { connect } from 'react-redux';
+
+import WalletConnect from './WalletConnect';
 
 import {
   Heading,
@@ -9,7 +11,6 @@ import {
 
 function Home(props) {
   const { walletConnected } = props;
-  const [toggleSets, setToggleSets] = useState(false);
   const cardData = [
     {
     heading: 'Standard Set',
@@ -25,10 +26,17 @@ function Home(props) {
 
   return (
     <div>
-      <Heading>Create a Set of your choosing.</Heading>
-      <Flex sx={{justifyContent:'center'}} m={4}>
-        {cardData.map((data, index) => <CardBox key={`id-${index}`} data={data}/>)}
-      </Flex>
+      {!walletConnected
+      ?
+      <WalletConnect />
+      :
+      <div>
+        <Heading>Create a Set of your choosing.</Heading>
+        <Flex sx={{justifyContent:'center'}} m={4}>
+          {cardData.map((data, index) => <CardBox key={`id-${index}`} data={data}/>)}
+        </Flex>
+      </div>
+      }
     </div>
   )
 }

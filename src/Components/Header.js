@@ -4,6 +4,10 @@ import ethIcon from '../Images/eth-icon.svg'
 
 // Redux
 import { connect } from 'react-redux';
+import {
+  setUserAddress,
+  toggleWalletConnected
+} from '../Redux/actions';
 
 import {
   Flex,
@@ -14,13 +18,23 @@ import {
 } from 'rebass';
 
 function Header(props) {
-  const { userAddress, walletConnected } = props;
+  const { 
+    userAddress, 
+    walletConnected, 
+    toggleWalletConnected, 
+    setUserAddress 
+  } = props;
+
   const [ shortUserAddress, setShortUserAddress ] = useState('');
   useEffect(() => {
-    // Format Display Address
-    const shortAddress = `${userAddress.slice(0, 7)}...${userAddress.slice(35, 42)}`;
-    setShortUserAddress(shortAddress);
-  }, [userAddress]);
+    if(window.ethereum.selectedAddress !== null) {
+      setUserAddress(window.ethereum.selectedAddress);
+      toggleWalletConnected(true);
+      // Format Display Address
+      const shortAddress = `${userAddress.slice(0, 7)}...${userAddress.slice(35, 42)}`;
+      setShortUserAddress(shortAddress);
+    }
+  }, [setUserAddress, toggleWalletConnected, userAddress]);
 
   return (
     <Flex
@@ -62,7 +76,10 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, {
+  setUserAddress, 
+  toggleWalletConnected
+})(Header);
 
 const Bar = styled.div`
 	margin: 0px 12px;

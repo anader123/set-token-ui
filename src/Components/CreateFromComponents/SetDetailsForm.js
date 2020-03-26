@@ -4,8 +4,7 @@ import {
   Button,
   Heading,
   Box,
-  Flex,
-  Card
+  Flex
 } from 'rebass'
 
 import {

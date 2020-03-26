@@ -5,8 +5,7 @@ import {
   Button,
   Heading,
   Box,
-  Flex,
-  Card
+  Flex
 } from 'rebass'
 
 export default function TokenSelect(props) {

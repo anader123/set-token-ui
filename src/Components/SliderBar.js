@@ -6,7 +6,8 @@ import {
 	Heading,
 	Text,
 	Button,
-	Card
+  Card,
+  Flex
 } from 'rebass';
 
 import { Slider } from '@rebass/forms'
@@ -49,25 +50,24 @@ export default function SliderBar(props) {
       p: '10px',
       borderRadius: 2,
       boxShadow: '0 0 16px rgba(0, 0, 0, .25)',
-      height: '165px',
       display: 'flex',
       alignItems: 'center',
       flexDirection: 'column',
       height: '256px'
     }}>
-
+    <Flex width={180} sx={{cursor: 'pointer', fontWeight: 'bold'}} justifyContent={'flex-end'}>
+      <div onClick={() => removeToken(index)}>X</div>
+    </Flex>
         <Box
         sx={{
-          m: 3,
-          p: 10,
-          height: '170px',
+          height: '200px',
           display: 'flex',
           justifyContent: 'space-evenly',
           alignItems: 'center',
           flexDirection: 'column',
         }}
         >
-          <Image width={60} height={60} src={token.image}></Image>
+          <Image width={70} height={70} src={token.image}></Image>
           <Heading>{token.symbol}</Heading>
             <Slider
               type='range'
@@ -91,7 +91,6 @@ export default function SliderBar(props) {
             />
           <Text>{value}%</Text>
         </Box>
-  			<Button sx={{mt: 0, p: 2, fontSize: 1}} onClick={() => removeToken(index)}>Remove</Button>
 		</Card>
     </Box>
   )

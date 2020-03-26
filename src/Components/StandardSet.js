@@ -5,7 +5,6 @@ import TokenSlider from './CreateFromComponents/TokenSliders';
 import TokenBoxs from './CreateFromComponents/TokenBoxes';
 import SetDetailsForm from './CreateFromComponents/SetDetailsForm';
 import ConfirmDetails from './CreateFromComponents/ConfirmDetails';
-import WalletConnect from './WalletConnect';
 
 export default class StandardSet extends Component {
   constructor() {
@@ -99,19 +98,12 @@ export default class StandardSet extends Component {
       setDetails, 
       setName, 
       setSymbol, 
-      setAddress, 
       sliderSum, 
       sliderValues 
     } = this.state;
 
     switch(step) {
       case 1: 
-      return (
-        <div>
-          <WalletConnect nextStep={this.nextStep} />
-        </div>
-      )
-      case 2: 
       return (
         <TokenBoxs  
           setDetails={setDetails}
@@ -121,7 +113,7 @@ export default class StandardSet extends Component {
           nextStep={this.nextStep}
         />
       )
-      case 3:
+      case 2:
         return (
           <TokenSlider
             sliderSum={sliderSum} 
@@ -136,7 +128,7 @@ export default class StandardSet extends Component {
             nextStep={this.nextStep}
           />
         )
-      case 4:
+      case 3:
         return (
           <SetDetailsForm
             setName={setName}
@@ -146,7 +138,7 @@ export default class StandardSet extends Component {
             nextStep={this.nextStep}
           />
         )
-      case 5:
+      case 4:
         return (
           <ConfirmDetails 
             setDetails={setDetails}
@@ -155,6 +147,8 @@ export default class StandardSet extends Component {
             prevStep={this.prevStep}
           />
         )
+      default:
+        return step;
     }
   }
 }

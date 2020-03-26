@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Heading, Flex } from 'rebass';
+import React, { useEffect } from 'react';
+import { Button, Heading } from 'rebass';
 
 // Redux
 import { connect } from 'react-redux';
@@ -9,22 +9,20 @@ import {
 } from '../Redux/actions';
 
 function WalletConnect(props) {
-  const { walletConnected, toggleWalletConnected, setUserAddress, nextStep } = props;
+  const { toggleWalletConnected, setUserAddress } = props;
 
   useEffect(() => {
     if(window.ethereum.selectedAddress !== null) {
       setUserAddress(window.ethereum.selectedAddress);
-      nextStep();
       toggleWalletConnected(true);
     }
-  }, [walletConnected])
+  })
 
   const connectWallet = async () => {
     if(window.ethereum) {
       const accounts = await window.ethereum.enable();
       setUserAddress(accounts[0]);
       toggleWalletConnected(true);
-      nextStep();
     }
     else {
       window.alert('No Ethereum wallet detected.');
