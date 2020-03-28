@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 // Components
-import Home from './Components/Home';
+import CreateHome from './Components/CreateHome';
 import StandardSet from './Components/StandardSet';
 import RebalancingSet from './Components/RebalancingSet';
 import Header from './Components/Header';
@@ -23,9 +23,9 @@ function App() {
       <Header />
         <Router>
           <Switch>
-            <Route path="/create-standard-set" component={StandardSet} />
-            <Route path="/create-rebalancing-set" component={RebalancingSet} />
-            <Route path="/" component={Home} />
+            <Route path="/create/standard-set" component={StandardSet} />
+            <Route path="/create/rebalancing-set" component={RebalancingSet} />
+            <Route path="/" component={CreateHome} />
           </Switch>
         </Router>
       </ThemeProvider>

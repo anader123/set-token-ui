@@ -15,12 +15,12 @@ function Home(props) {
     {
     heading: 'Standard Set',
     text: "Vanilla Set that simple a basket of assets.",
-    path: "/create-standard-set"
+    path: "/create/standard-set"
     },
     {
       heading: 'Rebalancing Set',
       text: "A set of tokens that can periodically rebalanced.",
-      path: './create-rebalancing-set'
+      path: '/create/rebalancing-set'
     }
   ];
 
