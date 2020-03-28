@@ -2,6 +2,8 @@
 import USDC from '../Images/usdc.png';
 import DAI from '../Images/dai.png';
 import TUSD from '../Images/tusd.png';
+import ZRX from '../Images/zeroX.png';
+import KNC from '../Images/kyber.png';
 
 export const stableTokenData = [
   {
@@ -25,4 +27,21 @@ export const stableTokenData = [
     "image": TUSD,
     "color": "#7ac7bc"
   }
+]
+
+export const exchangeTokenData = [
+  {
+    "address": "",
+    "symbol": "ZRX",
+    "name": "0x Protocol",
+    "image": ZRX,
+    "color": "#302c2c"
+  },
+  {
+    "address": "",
+    "symbol": "KNC",
+    "name": "Kyber Network",
+    "image": KNC,
+    "color": "#2a8c92"
+  },
 ]

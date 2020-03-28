@@ -5,7 +5,6 @@ import {
 	Box,
 	Heading,
 	Text,
-	Button,
   Card,
   Flex
 } from 'rebass';
@@ -53,7 +52,7 @@ export default function SliderBar(props) {
       display: 'flex',
       alignItems: 'center',
       flexDirection: 'column',
-      height: '256px'
+      height: '240px'
     }}>
     <Flex width={180} sx={{cursor: 'pointer', fontWeight: 'bold'}} justifyContent={'flex-end'}>
       <div onClick={() => removeToken(index)}>X</div>

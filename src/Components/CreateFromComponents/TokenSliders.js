@@ -4,7 +4,6 @@ import SliderBar from '../SliderBar';
 import {
   Button,
   Heading,
-  Box,
   Flex
 } from 'rebass'
 
@@ -26,25 +25,23 @@ export default function TokenSelect(props) {
     <div>
       <Heading>Choose Percents</Heading>
       <Heading>Total: {sliderSum}%</Heading>
-      <Flex sx={{justifyContent:'center', margin: 3}}> 
+      <Flex sx={{ margin: 3, justifyContent:'center', flexWrap: 'wrap'}}> 
           {setDetails.map((token, index) => 
-            <Box key={`id-${index}`} sx={{height: '250px', width: '250px'}}>
-              <SliderBar
-              key={`id-${index}`} 
-              sliderSum={sliderSum} 
-              removeToken={removeToken} 
-              sumSliderValues={sumSliderValues} 
-              updateSliderValues={updateSliderValues} 
-              sliderValues={sliderValues} 
-              index={index} 
-              token={token}
-              setDetails={setDetails}
-              updateSliderAmount={updateSliderAmount}
-              />
-            </Box>
+            <SliderBar
+            key={`id-${index}`} 
+            sliderSum={sliderSum} 
+            removeToken={removeToken} 
+            sumSliderValues={sumSliderValues} 
+            updateSliderValues={updateSliderValues} 
+            sliderValues={sliderValues} 
+            index={index} 
+            token={token}
+            setDetails={setDetails}
+            updateSliderAmount={updateSliderAmount}
+            />
           )}
       </Flex>
-      <Flex sx={{justifyContent:'center', minWidth:'300px', margin: '30px', padding: [3,0,0,3]}}>
+      <Flex sx={{justifyContent:'center', minWidth:'300px'}}>
         <Button onClick={prevStep}>Previous</Button>
         <Button onClick={() => percentCheck(nextStep)}>Next</Button>
       </Flex>

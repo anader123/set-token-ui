@@ -88,7 +88,10 @@ export default {
         checkbox: {},
       },
     heading: {
-      fontSize: [ 2, 4 ],
+      fontSize: [ 3, 4 ],
       color: 'secondary',
+    },
+    flex: {
+      bg: 'red'
     }
   }

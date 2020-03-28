@@ -6,6 +6,9 @@ import TokenBoxs from './CreateFromComponents/TokenBoxes';
 import SetDetailsForm from './CreateFromComponents/SetDetailsForm';
 import ConfirmDetails from './CreateFromComponents/ConfirmDetails';
 
+// Ethereum 
+import { stableTokenData } from '../Ethereum/TokenData';
+
 export default class StandardSet extends Component {
   constructor() {
     super();
@@ -111,6 +114,7 @@ export default class StandardSet extends Component {
           addToken={this.addToken}
           tokenCheck={this.tokenCheck}
           nextStep={this.nextStep}
+          tokens={stableTokenData}
         />
       )
       case 2:

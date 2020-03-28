@@ -3,9 +3,6 @@ import React from 'react';
 // Components
 import TokenBox from '../TokenBox';
 
-// Ethereum 
-import { stableTokenData } from '../../Ethereum/TokenData';
-
 import {
   Button,
   Heading,
@@ -18,13 +15,14 @@ export default function TokenBoxes(props) {
     addToken,
     setDetails,
     tokenCheck,
-    nextStep
+    nextStep,
+    tokens
   } = props;
   return (
     <div>
       <Heading>Select Tokens</Heading>
-      <Flex sx={{justifyContent:'center'}} p={4}>
-        {stableTokenData.map((token, index) => 
+      <Flex m={3} sx={{ flexWrap: 'wrap',justifyContent:'center'}}>
+        {tokens.map((token, index) => 
         <TokenBox 
         key={`id-${index}`} 
         removeToken={removeToken} 

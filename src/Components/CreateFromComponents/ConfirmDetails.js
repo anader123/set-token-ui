@@ -1,6 +1,10 @@
 import React from 'react';
 import PieChart from '../PieChart';
 import styled from 'styled-components';
+import { createStableSet } from '../../Ethereum/CreateStandardSet';
+
+// Redux
+import { connect } from 'react-redux';
 
 import {
   Button,
@@ -9,12 +13,13 @@ import {
   Card
 } from 'rebass';
 
-export default function ConfirmDetails(props) {
+function ConfirmDetails(props) {
   const {
     setDetails,
     setName,
     setSymbol,
-    prevStep
+    prevStep,
+    userAddress
   } = props;
 
   const Box = styled.div`
@@ -60,6 +65,13 @@ export default function ConfirmDetails(props) {
       </Card>
       </Flex>
         <Button onClick={prevStep}>Previous</Button>
+        <Button onClick={() => createStableSet(setDetails, setName, setSymbol, userAddress)}>Create Set</Button>
     </div>
   )
 }
+
+function mapStateToProps(state) {
+  return state;
+}
+
+export default connect(mapStateToProps)(ConfirmDetails);
