@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
 	Image,
@@ -9,22 +9,22 @@ import {
   Flex
 } from 'rebass';
 
-import { Slider } from '@rebass/forms'
+import { Slider } from '@rebass/forms';
 
 export default function SliderBar(props) {
 	const { 
 		token, 
-		index, 
-		sliderValues, 
+    index, 
+    sliderValues,
 		sumSliderValues, 
-		updateSliderValues,
     removeToken,
     setDetails,
-    updateSliderAmount
+    updateSetDetails,
+    updateSliderValues,
 	} = props;
-	const [value, setValue] = useState(sliderValues[index]);
+  const [value, setValue] = useState(token.amount);
 
-	const handleChange = async event => {
+  const handleChange = async event => {
 		const sliderValuesCopy = [...sliderValues];
     sliderValuesCopy[index] = +event.target.value;
     
@@ -33,7 +33,7 @@ export default function SliderBar(props) {
 		if(valuesSum <= 100 ){
       const setDetailsCopy = [...setDetails];
       setDetailsCopy[index].amount = +event.target.value;
-      updateSliderAmount(setDetailsCopy);
+      updateSetDetails(setDetailsCopy);
 
 			setValue(+event.target.value);
 			await updateSliderValues(sliderValuesCopy);

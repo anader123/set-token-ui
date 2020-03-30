@@ -25,7 +25,10 @@ export default function SetDetailsForm(props) {
     <div>
       <Heading>Enter Set Details</Heading>
       <Flex justifyContent={'center'}>
-        <Box as='form' mt={4} width={'400px'} onSubmit={e => e.preventDefault()}>
+        <Box as='form' mt={4} width={'400px'} onSubmit={e => {
+          e.preventDefault();
+          nextStep();
+          }}>
           
           <Box m={4}>
             <Label>Token Name</Label>
@@ -48,7 +51,7 @@ export default function SetDetailsForm(props) {
 
           <Flex sx={{justifyContent:'center', minWidth:'300px', mt: 3, padding: [3,0,0,3]}}>
           <Button onClick={prevStep}>Previous</Button>
-          <Button onClick={nextStep}>Next</Button>
+          <Button type='submit'>Next</Button>
           </Flex>
         </Box>
       </Flex>

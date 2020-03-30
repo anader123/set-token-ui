@@ -6,10 +6,16 @@ import TokenBoxs from './CreateFromComponents/TokenBoxes';
 import SetDetailsForm from './CreateFromComponents/SetDetailsForm';
 import ConfirmDetails from './CreateFromComponents/ConfirmDetails';
 
+// Redux 
+import { connect } from 'react-redux';
+
 // Ethereum 
 import { stableTokenData } from '../Ethereum/TokenData';
+import { createStableSet } from '../Ethereum/CreateStandardSet';
 
-export default class StandardSet extends Component {
+import { Button } from 'rebass';
+
+class StandardSet extends Component {
   constructor() {
     super();
 
@@ -28,6 +34,7 @@ export default class StandardSet extends Component {
     const { setDetails, sliderValues } = this.state;
     if(setDetails.findIndex(i => i.name === token.name) === -1) {
       const newSetDetails = [...setDetails];
+      token.amount = 0;
       newSetDetails.push(token);
 
       const newSliderValues = [...sliderValues];
@@ -59,7 +66,7 @@ export default class StandardSet extends Component {
     this.setState({ sliderSum });
   }
 
-  updateSliderAmount = setDetails => this.setState({ setDetails });
+  updateSetDetails = setDetails => this.setState({ setDetails });
 
   nextStep = () => { 
     const { step } = this.state;
@@ -98,12 +105,16 @@ export default class StandardSet extends Component {
   render() {
     const { 
       step, 
-      setDetails, 
       setName, 
       setSymbol, 
       sliderSum, 
+      setDetails, 
       sliderValues 
     } = this.state;
+
+    const {
+      userAddress
+    } = this.props;
 
     switch(step) {
       case 1: 
@@ -120,16 +131,16 @@ export default class StandardSet extends Component {
       case 2:
         return (
           <TokenSlider
+            sliderValues={sliderValues}
             sliderSum={sliderSum} 
             setDetails={setDetails}
-            sliderValues={sliderValues} 
             removeToken={this.removeToken} 
             sumSliderValues={this.sumSliderValues} 
-            updateSliderValues={this.updateSliderValues} 
-            updateSliderAmount={this.updateSliderAmount}
             percentCheck={this.percentCheck}
             prevStep={this.prevStep}
             nextStep={this.nextStep}
+            updateSetDetails={this.updateSetDetails}
+            updateSliderValues={this.updateSliderValues}
           />
         )
       case 3:
@@ -144,12 +155,15 @@ export default class StandardSet extends Component {
         )
       case 4:
         return (
+          <div>
           <ConfirmDetails 
             setDetails={setDetails}
             setName={setName}
             setSymbol={setSymbol}
-            prevStep={this.prevStep}
           />
+          <Button onClick={this.prevStep}>Previous</Button>
+          <Button onClick={() => createStableSet(setDetails, userAddress, setName, setSymbol)}>Create Set</Button>
+          </div>
         )
       default:
         return step;
@@ -157,3 +171,8 @@ export default class StandardSet extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return state;
+}
+
+export default connect(mapStateToProps)(StandardSet);

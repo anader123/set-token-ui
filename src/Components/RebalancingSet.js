@@ -6,10 +6,15 @@ import TokenBoxs from './CreateFromComponents/TokenBoxes';
 import SetDetailsForm from './CreateFromComponents/SetDetailsForm';
 import ConfirmDetails from './CreateFromComponents/ConfirmDetails';
 
+// Redux 
+import { connect } from 'react-redux';
+
 // Ethereum
 import { exchangeTokenData } from '../Ethereum/TokenData';
 
-export default class StandardSet extends Component {
+import { Button } from 'rebass';
+
+class StandardSet extends Component {
   constructor() {
     super();
 
@@ -28,6 +33,7 @@ export default class StandardSet extends Component {
     const { setDetails, sliderValues } = this.state;
     if(setDetails.findIndex(i => i.name === token.name) === -1) {
       const newSetDetails = [...setDetails];
+      token.amount = 0;
       newSetDetails.push(token);
 
       const newSliderValues = [...sliderValues];
@@ -59,7 +65,7 @@ export default class StandardSet extends Component {
     this.setState({ sliderSum });
   }
 
-  updateSliderAmount = setDetails => this.setState({ setDetails });
+  updateSetDetails = setDetails => this.setState({ setDetails });
 
   nextStep = () => { 
     const { step } = this.state;
@@ -105,6 +111,8 @@ export default class StandardSet extends Component {
       sliderValues 
     } = this.state;
 
+    // const { userAddress } = this.props;
+
     switch(step) {
       case 1: 
       return (
@@ -126,7 +134,7 @@ export default class StandardSet extends Component {
             removeToken={this.removeToken} 
             sumSliderValues={this.sumSliderValues} 
             updateSliderValues={this.updateSliderValues} 
-            updateSliderAmount={this.updateSliderAmount}
+            updateSetDetails={this.updateSetDetails}
             percentCheck={this.percentCheck}
             prevStep={this.prevStep}
             nextStep={this.nextStep}
@@ -144,15 +152,24 @@ export default class StandardSet extends Component {
         )
       case 4:
         return (
-          <ConfirmDetails 
-            setDetails={setDetails}
-            setName={setName}
-            setSymbol={setSymbol}
-            prevStep={this.prevStep}
-          />
+          <div>
+            <ConfirmDetails 
+              setDetails={setDetails}
+              setName={setName}
+              setSymbol={setSymbol}
+              prevStep={this.prevStep}
+            />
+            <Button onClick={this.prevStep}>Previous</Button>
+          </div>
         )
       default:
         return step;
     }
   }
 }
+
+function mapStateToProps(state) {
+  return state;
+}
+
+export default connect(mapStateToProps)(StandardSet);

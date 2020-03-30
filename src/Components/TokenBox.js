@@ -6,7 +6,7 @@ import {
   Image,
   Heading,
   Text
-} from 'rebass'
+} from 'rebass';
 
 export default function TokenBox(props) {
   const { token, addToken, removeToken, setDetails } = props;

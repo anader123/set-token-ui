@@ -13,13 +13,13 @@ export const stableTokenData = [
     "image": DAI,
     "color": "#fab72e"
   },
-  {
-    "address": "",
-    "symbol": "USDC",
-    "name": "USD Coin",
-    "image": USDC,
-    "color": "#2775c8"
-  },
+  // {
+  //   "address": "",
+  //   "symbol": "USDC",
+  //   "name": "USD Coin",
+  //   "image": USDC,
+  //   "color": "#2775c8"
+  // },
   {
     "address": "0xAdB015D61F4bEb2A712D237D9d4c5B75BAFEfd7B",
     "symbol": "TUSD",

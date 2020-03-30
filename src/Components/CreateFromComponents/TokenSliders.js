@@ -15,7 +15,7 @@ export default function TokenSelect(props) {
       updateSliderValues, 
       sliderValues, 
       setDetails,
-      updateSliderAmount,
+      updateSetDetails,
       percentCheck,
       nextStep,
       prevStep
@@ -37,7 +37,7 @@ export default function TokenSelect(props) {
             index={index} 
             token={token}
             setDetails={setDetails}
-            updateSliderAmount={updateSliderAmount}
+            updateSetDetails={updateSetDetails}
             />
           )}
       </Flex>

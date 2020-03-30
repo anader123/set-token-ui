@@ -43,6 +43,7 @@ const config = {
 export const setProtocol = new SetProtocol(provider, config);
 
 export const createStableSet = async (setDetails, userAddress, setName, setSymbol) => {
+  console.log(setDetails, userAddress, setName, setSymbol)
     const componentAddresses = [];
     const componentAmounts = [];
 
