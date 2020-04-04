@@ -62,7 +62,7 @@ function Header(props) {
       <Link 
         target="_blank" 
         rel="noopener noreferrer"
-        href={`https://etherscan.io/address/${userAddress}`}
+        href={`https://kovan.etherscan.io/address/${userAddress}`}
       >
         <Text mr={[1, 4]}>Address: {shortUserAddress}</Text>
       </Link>

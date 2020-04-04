@@ -43,35 +43,40 @@ const config = {
 export const setProtocol = new SetProtocol(provider, config);
 
 export const createStableSet = async (setDetails, userAddress, setName, setSymbol) => {
-  console.log(setDetails, userAddress, setName, setSymbol)
-    const componentAddresses = [];
-    const componentAmounts = [];
+  const componentAddresses = [];
+  const componentAmounts = [];
 
-    setDetails.forEach(token => {
-      componentAddresses.push(token.address);
-      componentAmounts.push(new BigNumber((token.amount/100)));
-    })
+  setDetails.forEach(token => {
+    componentAddresses.push(token.address);
+    componentAmounts.push(new BigNumber((token.amount/100)));
+  })
 
-    const { units, naturalUnit } = await setProtocol.calculateSetUnitsAsync(
-      componentAddresses,
-      [new BigNumber(1), new BigNumber(1)], // Price assumed to be $1 for stable coins
-      componentAmounts,
-      new BigNumber(1)
-    );
+  const { units, naturalUnit } = await setProtocol.calculateSetUnitsAsync(
+    componentAddresses,
+    [new BigNumber(1), new BigNumber(1)], // Asset Prices
+    componentAmounts,
+    new BigNumber(1) // Set Target Price 
+  );
 
-    const txOpts = {
-      userAddress,
-      gas: 4000000,
-      gasPrice: 8000000000
-    }
+  const txOpts = {
+    userAddress,
+    gas: 4000000,
+    gasPrice: 8000000000
+  }
 
-    const txHash = await setProtocol.createSetAsync(
-      componentAddresses,
-      units,
-      naturalUnit,
-      setName,
-      setSymbol,
-      txOpts
-    );
-    return await setProtocol.getSetAddressFromCreateTxHashAsync(txHash);
+  const transactionHash = await setProtocol.createSetAsync(
+    componentAddresses,
+    units,
+    naturalUnit,
+    setName,
+    setSymbol,
+    txOpts
+  );
+
+  return transactionHash;
+}
+
+export const getSetAddress = async (transactionHash) => {
+  const setAddress = await setProtocol.getSetAddressFromCreateTxHashAsync(transactionHash);
+  return setAddress;
 }

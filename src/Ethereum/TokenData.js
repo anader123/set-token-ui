@@ -1,5 +1,4 @@
 // Images
-import USDC from '../Images/usdc.png';
 import DAI from '../Images/dai.png';
 import TUSD from '../Images/tusd.png';
 import ZRX from '../Images/zeroX.png';
@@ -13,13 +12,6 @@ export const stableTokenData = [
     "image": DAI,
     "color": "#fab72e"
   },
-  // {
-  //   "address": "",
-  //   "symbol": "USDC",
-  //   "name": "USD Coin",
-  //   "image": USDC,
-  //   "color": "#2775c8"
-  // },
   {
     "address": "0xAdB015D61F4bEb2A712D237D9d4c5B75BAFEfd7B",
     "symbol": "TUSD",

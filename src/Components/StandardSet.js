@@ -5,13 +5,15 @@ import TokenSlider from './CreateFromComponents/TokenSliders';
 import TokenBoxs from './CreateFromComponents/TokenBoxes';
 import SetDetailsForm from './CreateFromComponents/SetDetailsForm';
 import ConfirmDetails from './CreateFromComponents/ConfirmDetails';
+import LoadingPage from './LoadingPage';
+import TransactionDetails from './CreateFromComponents/TransactionDetails';
 
 // Redux 
 import { connect } from 'react-redux';
 
 // Ethereum 
 import { stableTokenData } from '../Ethereum/TokenData';
-import { createStableSet } from '../Ethereum/CreateStandardSet';
+import { createStableSet, getSetAddress } from '../Ethereum/CreateStandardSet';
 
 import { Button } from 'rebass';
 
@@ -26,7 +28,8 @@ class StandardSet extends Component {
       sliderSum: 0,
       setName: '',
       setSymbol: '',
-      setAddress: ''
+      setAddress: '',
+      transactionHash: ''
     }
   }
 
@@ -102,6 +105,20 @@ class StandardSet extends Component {
     }
   }
 
+  pushToLoading = async () => {
+  const { userAddress } = this.props;
+    const { 
+      setName, 
+      setSymbol, 
+      setDetails,
+    } = this.state;
+
+    const transactionHash = await createStableSet(setDetails, userAddress, setName, setSymbol);
+    this.nextStep();
+    const setAddress = await getSetAddress(transactionHash);
+    this.setState({ transactionHash, setAddress });
+  }
+
   render() {
     const { 
       step, 
@@ -109,12 +126,10 @@ class StandardSet extends Component {
       setSymbol, 
       sliderSum, 
       setDetails, 
-      sliderValues 
+      sliderValues,
+      transactionHash,
+      setAddress
     } = this.state;
-
-    const {
-      userAddress
-    } = this.props;
 
     switch(step) {
       case 1: 
@@ -162,8 +177,16 @@ class StandardSet extends Component {
             setSymbol={setSymbol}
           />
           <Button onClick={this.prevStep}>Previous</Button>
-          <Button onClick={() => createStableSet(setDetails, userAddress, setName, setSymbol)}>Create Set</Button>
+          <Button onClick={this.pushToLoading}>Create Set</Button>
           </div>
+        )
+      case 5:
+        return (
+          <LoadingPage nextStep={this.nextStep} />
+        )
+      case 6:
+        return (
+          <TransactionDetails setAddress={setAddress} setName={setName} transactionHash={transactionHash} />
         )
       default:
         return step;
