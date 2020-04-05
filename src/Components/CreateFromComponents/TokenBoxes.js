@@ -21,7 +21,7 @@ export default function TokenBoxes(props) {
   return (
     <div>
       <Heading>Select Tokens</Heading>
-      <Flex m={3} sx={{ flexWrap: 'wrap',justifyContent:'center'}}>
+      <Flex m={4} sx={{ flexWrap: 'wrap',justifyContent:'center'}}>
         {tokens.map((token, index) => 
         <TokenBox 
         key={`id-${index}`} 

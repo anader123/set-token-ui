@@ -31,7 +31,7 @@ function Header(props) {
       setUserAddress(window.ethereum.selectedAddress);
       toggleWalletConnected(true);
       // Format Display Address
-      const shortAddress = `${userAddress.slice(0, 7)}...${userAddress.slice(35, 42)}`;
+      const shortAddress = `${userAddress.slice(0, 6)}...${userAddress.slice(38, 42)}`;
       setShortUserAddress(shortAddress);
     }
   }, [setUserAddress, toggleWalletConnected, userAddress]);
@@ -39,25 +39,24 @@ function Header(props) {
   return (
     <Flex
       px={2}
-      color='black'
-      bg='white'
       alignItems='center'>
         <Image 
-          ml={4}
+          ml={[1, 4]}
           src={ethIcon}
           height='40px'
         />
         <Bar />
         <Text p={4} pl={0} fontSize={[ 2, 4 ]}>
-        <Link href={'/'}>
         Set Factory
-        </Link>
         </Text>
       <Box mx='auto' />
       <div>
       {!walletConnected 
       ?
-      <div/>
+      <Flex alignItems='center'>
+        <Circle />
+        <Text mr={[1, 4]}>No Wallet Connected</Text>
+      </Flex>
       :
       <Link 
         target="_blank" 
@@ -84,5 +83,13 @@ export default connect(mapStateToProps, {
 const Bar = styled.div`
 	margin: 0px 12px;
 	border-left: 1px solid black;
-	height: 42px;
+  height: 42px;
+`;
+
+const Circle = styled.div`
+  height: 20px;
+  width: 20px;
+  margin: 0px 12px;
+  border-radius: 50%;
+  background: #2909f7;
 `;

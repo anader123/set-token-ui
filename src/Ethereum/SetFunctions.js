@@ -1,5 +1,5 @@
 import SetProtocol from 'setprotocol.js';
-import * as Web3 from 'web3';
+// import * as Web3 from 'web3';
 import BigNumber from 'bignumber.js';
 
 const injectedWeb3 = window.web3 || undefined;

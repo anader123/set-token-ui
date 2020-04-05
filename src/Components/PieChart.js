@@ -18,7 +18,6 @@ const Arc = ({ arcData }) => {
 }
 
 const PieChart = ({ data, x, y }) => {
-  console.log(data)
   const pie = d3.pie().value(d => d.amount);
   return (
     <g transform={`translate(${x}, ${y})`}>

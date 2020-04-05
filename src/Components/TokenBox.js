@@ -19,7 +19,7 @@ export default function TokenBox(props) {
   }, [setDetails, token.name])
   
   return (
-    <Box m={3} width={256}>
+    <Box m={3} width={240}>
       <Card
         onClick={() => {
           if(selected === false) {
@@ -34,12 +34,12 @@ export default function TokenBox(props) {
         }}
         sx={!selected ?
           {
-              ':hover': {
-                  backgroundColor: '#F4F4FA',
-                  transition: '200ms',
-                  transform: 'scale(1.08)',
-                  width: 'auto'
-                  },
+            ':hover': {
+                backgroundColor: '#F4F4FA',
+                transition: '200ms',
+                transform: 'scale(1.08)',
+                width: 'auto'
+                },
           p: 1,
           transition: '300ms',
           borderRadius: 2,

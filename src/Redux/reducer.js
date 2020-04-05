@@ -8,8 +8,8 @@ const initialState = {
 // Action Types
 const SET_USER_ADDRESS = 'SET_USER_ADDRESS';
 const TOGGLE_WALLET_CONNECTED = 'TOGGLE_WALLET_CONNECTED';
-const UPDATE_SET_DETAILS = 'UPDATE_SET_DETAILS';
-const UPDATE_SLIDER_VALUES = 'UPDATE_SLIDER_VALUES';
+// const UPDATE_SET_DETAILS = 'UPDATE_SET_DETAILS';
+// const UPDATE_SLIDER_VALUES = 'UPDATE_SLIDER_VALUES';
 
 // Reducer
 export default function reducer(state = initialState, action) {

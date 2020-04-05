@@ -13,11 +13,11 @@ import { connect } from 'react-redux';
 
 // Ethereum 
 import { stableTokenData } from '../Ethereum/TokenData';
-import { createStableSet, getSetAddress } from '../Ethereum/CreateStandardSet';
+import { createStableSet, getSetAddress } from '../Ethereum/SetFunctions';
 
 import { Button } from 'rebass';
 
-class StandardSet extends Component {
+class StableSet extends Component {
   constructor() {
     super();
 
@@ -198,4 +198,4 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps)(StandardSet);
+export default connect(mapStateToProps)(StableSet);

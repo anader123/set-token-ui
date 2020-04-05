@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, Heading } from 'rebass';
 
 // Redux
@@ -10,13 +10,6 @@ import {
 
 function WalletConnect(props) {
   const { toggleWalletConnected, setUserAddress } = props;
-
-  useEffect(() => {
-    if(window.ethereum.selectedAddress !== null) {
-      setUserAddress(window.ethereum.selectedAddress);
-      toggleWalletConnected(true);
-    }
-  })
 
   const connectWallet = async () => {
     if(window.ethereum) {

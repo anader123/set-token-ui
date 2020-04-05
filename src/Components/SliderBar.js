@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import {
 	Image,
@@ -21,7 +21,8 @@ export default function SliderBar(props) {
     setDetails,
     updateSetDetails,
     updateSliderValues,
-	} = props;
+  } = props;
+  
   const [value, setValue] = useState(token.amount);
 
   const handleChange = async event => {
@@ -85,7 +86,7 @@ export default function SliderBar(props) {
                 'opacity': '0.7',
                 'WebkitTransition': '.2s',
                 'transition': 'opacity .2s',
-                'borderRadius': '3px'
+                'borderRadius': '2px'
               }}
             />
           <Text>{value}%</Text>
