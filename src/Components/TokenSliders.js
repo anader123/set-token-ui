@@ -1,5 +1,5 @@
 import React from 'react'
-import SliderBar from '../SliderBar';
+import SliderBar from './SliderBar';
 
 import {
   Button,

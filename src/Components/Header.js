@@ -31,7 +31,7 @@ function Header(props) {
       setUserAddress(window.ethereum.selectedAddress);
       toggleWalletConnected(true);
       // Format Display Address
-      const shortAddress = `${userAddress.slice(0, 6)}...${userAddress.slice(38, 42)}`;
+      const shortAddress = `${userAddress.slice(0, 7)}...${userAddress.slice(37, 42)}`;
       setShortUserAddress(shortAddress);
     }
   }, [setUserAddress, toggleWalletConnected, userAddress]);

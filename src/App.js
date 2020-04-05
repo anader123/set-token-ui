@@ -9,7 +9,6 @@ import Header from './Components/Header';
 import { ThemeProvider } from 'emotion-theming'
 import theme from './theme'
 
-
 function App() {
   return (
     <div className="App">

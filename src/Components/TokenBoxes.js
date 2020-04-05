@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import TokenBox from '../TokenBox';
+import TokenBox from './TokenBox';
 
 import {
   Button,

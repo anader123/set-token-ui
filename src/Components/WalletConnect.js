@@ -3,10 +3,7 @@ import { Button, Heading } from 'rebass';
 
 // Redux
 import { connect } from 'react-redux';
-import {
-  setUserAddress,
-  toggleWalletConnected
-} from '../Redux/actions';
+import { setUserAddress, toggleWalletConnected } from '../Redux/actions';
 
 function WalletConnect(props) {
   const { toggleWalletConnected, setUserAddress } = props;

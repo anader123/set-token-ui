@@ -1,5 +1,5 @@
 import React from 'react';
-import PieChart from '../PieChart';
+import PieChart from './PieChart';
 import styled from 'styled-components';
 
 import {
@@ -7,6 +7,7 @@ import {
   Flex,
   Card
 } from 'rebass';
+import { cardBoxFormatting } from '../theme';
 
 export default function ConfirmDetails(props) {
   const {
@@ -15,36 +16,20 @@ export default function ConfirmDetails(props) {
     setSymbol
   } = props;
 
-  const Box = styled.div`
-    background-color: ${props => props.token.color};
-    height: 20px;
-    width: 20px;
-    margin-right: 5px;
-  `
   return (
     <div>
       <Heading>Confirm Details</Heading>
       <Flex justifyContent={'center'}>
-      <Card 
-      sx={{
-        m: [3, 0, 0, 4],
-        p: 1,
-        transition: '300ms',
-        borderRadius: 2,
-        boxShadow: '0 0 16px rgba(0, 0, 0, .25)',
-        height: '450px',
-        width: '375px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column'
-        }}
-      >
+      <Card sx={cardBoxFormatting}>
+
         <Heading>Name: {setName}</Heading>
         <Heading>Symbol: {setSymbol}</Heading>
+
+        {/* Pie Chart */}
         <svg width='200' height='200'>
           <PieChart data={setDetails} x={100} y={100} />
         </svg>
+
         <Flex flexDirection={'column'} justifyContent={'flex-start'}>
           {setDetails.map((token, index) => {
             return(
@@ -60,3 +45,10 @@ export default function ConfirmDetails(props) {
     </div>
   )
 }
+
+const Box = styled.div`
+background-color: ${props => props.token.color};
+height: 20px;
+width: 20px;
+margin-right: 5px;
+`

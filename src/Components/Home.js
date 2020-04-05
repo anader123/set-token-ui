@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // Components
 import WalletConnect from './WalletConnect';
-import StableSet from './StableSet';
+import StableSet from './StableSetDashboard';
 
 function Home(props) {
   const { walletConnected } = props;

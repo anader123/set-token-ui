@@ -12,14 +12,14 @@ export default function LoadingPage(props) {
   useEffect(() => {
     setTimeout(() => {
       nextStep();
-    }, 25000); 
+    }, 20000); 
   }, [nextStep]); 
 
   return (
     <Flex flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
       <Heading mt={'20px'}>Ethereum Magic in Progress</Heading>
-      <Text mt={'5px'}>Your transaction is being added to the blockchain.</Text>
-      <ReactLoading type={'bubbles'} color={'#583aff'} width={250} />
+      <Text m={'5px'}>Your transaction is being added to the blockchain.</Text>
+      <ReactLoading type={'cubes'} color={'#583aff'} width={225} />
     </Flex>
   )
 }

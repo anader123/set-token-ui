@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { Button } from 'rebass';
 
 // Components
-import TokenSlider from './CreateFromComponents/TokenSliders';
-import TokenBoxs from './CreateFromComponents/TokenBoxes';
-import SetDetailsForm from './CreateFromComponents/SetDetailsForm';
-import ConfirmDetails from './CreateFromComponents/ConfirmDetails';
+import TokenSlider from './TokenSliders';
+import TokenBoxs from './TokenBoxes';
+import SetDetailsForm from './SetDetailsForm';
+import ConfirmDetails from './ConfirmDetails';
 import LoadingPage from './LoadingPage';
-import TransactionDetails from './CreateFromComponents/TransactionDetails';
+import TransactionDetails from './TransactionDetails';
 
 // Redux 
 import { connect } from 'react-redux';
@@ -14,8 +15,6 @@ import { connect } from 'react-redux';
 // Ethereum 
 import { stableTokenData } from '../Ethereum/TokenData';
 import { createStableSet, getSetAddress } from '../Ethereum/SetFunctions';
-
-import { Button } from 'rebass';
 
 class StableSet extends Component {
   constructor() {
@@ -186,7 +185,11 @@ class StableSet extends Component {
         )
       case 6:
         return (
-          <TransactionDetails setAddress={setAddress} setName={setName} transactionHash={transactionHash} />
+          <TransactionDetails 
+            setAddress={setAddress} 
+            setSymbol={setSymbol} 
+            transactionHash={transactionHash} 
+          />
         )
       default:
         return step;

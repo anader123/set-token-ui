@@ -13,7 +13,7 @@ const Arc = ({ arcData }) => {
   .outerRadius(75);
 
   return (
-    <Path d={arc(arcData)} arcData={arcData}  index={arcData.index}>Test</Path>
+    <Path d={arc(arcData)} arcData={arcData}  index={arcData.index} />
   )
 }
 
